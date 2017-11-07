@@ -29,69 +29,48 @@ proc freq data=helpmkh;
 * use proc means to get summary stats by group
   parametric stats first;
 
-proc means data=helpmkh;
-
-
-
-
-
-proc corr data=helpmkh;
-  var homeless age female pss_fr pcs mcs cesd indtot;
+proc means data=helpmkh n min max mean std;
+  class treat;
+  var age pss_fr pcs mcs cesd;
   run;
 
-* ============================================.
-* Given the stronger correlation between indtot
-* and homeless, let's run a t-test to see the comparison
-* ============================================;
+* non-parametric stats next;
+
+proc means data=helpmkh n min max median q1 q3;
+  class treat;
+  var a15a a15b d1 e2b i1 i2;
+  run;
+
+* run t-tests for the parametric vars;
 
 proc ttest data=helpmkh;
-  class homeless;
-  var indtot;
+  class treat;
+  var age pss_fr pcs mcs cesd;
   run;
 
-* ============================================.
-* Let's run a logistic regression of indtot to predict
-* the probability of being homeless
-* we'll also SAVE the predicted probabilities
-* and the predicted group membership
-*
-* let's look at different thresholds pprob
-* ctable gives us the classification table
-*
-* use the plots=roc to get the ROC curve
-* ============================================;
+* run Mann Whitney tests for the non-parametric vars;
 
-proc logistic data=helpmkh plots=roc;
-  model homeless = indtot / ctable pprob=(0.2 to 0.8 by 0.1);
-  output out=m1 p=prob;
+proc npar1way data=helpmkh wilcoxon;
+  class treat;
+  var a15a a15b d1 e2b i1 i2;
   run;
 
-* ============================================
-  using the saved probabilities
-  make a plot against the indtot predictor
-* ============================================;
+* run chi-square tests for the categorical vars
+  female racegrp homeless g1b
+  and get the column % within groups;
 
-proc gplot data = m1;
-  plot prob*indtot;
-run;
-
-* ============================================.
-* Given the correlation matrix above, it looks like
-* gender, pss_fr, pcs, and indtot are all significantly
-* associated with being homeless
-*
-* let's put all of these together into 1
-* model
-* ============================================;
-
-proc logistic data=helpmkh;
-  model homeless = female pss_fr pcs indtot;
+proc freq data=helpmkh;
+  table female*treat / chisq fisher expected norow nopercent;
   run;
 
-* ============================================
-  let's also run using variable selection
-* ============================================;
+proc freq data=helpmkh;
+  table racegrp*treat / chisq fisher expected norow nopercent;
+  run;
 
-proc logistic data=helpmkh;
-  model homeless = female pss_fr pcs indtot / selection=forward;
+proc freq data=helpmkh;
+  table homeless*treat / chisq fisher expected norow nopercent;
+  run;
+
+proc freq data=helpmkh;
+  table g1b*treat / chisq fisher expected norow nopercent;
   run;
