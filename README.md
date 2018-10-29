@@ -1,5 +1,38 @@
-N736 Fall 2017 - Homework 3 Answer Key
+N736 - Homework 3 Answer Key
 ================
+
+# Answer Key
+
+## Homework 3 - Answer Key Document
+
+Using the template provided for Homework 3, the final output document
+that included the write-up of the methods, results and “Table 1” are
+provided here in:
+
+  - Word Document Format (\*.DOCX)
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/N736Homework03_AnswerKey.docx>
+  - PDF Document Format (\*.PDF)
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/N736Homework03_AnswerKey.pdf>
+
+## Homework 3 - Answer Key Code
+
+The following files provide the analysis codes to complete the
+descriptive statistical summaries, assumption checks and comparison
+tests needed to complete Homework 3.
+
+  - `R` Code
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/Hmwk3Key_Rcode.R>
+    - which will read in the `SPSS` formatted dataset
+  - `SPSS` Code
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/SPSS_Syntax_hmwk3_key.sps>
+  - `SPSS` formatted dataset
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/helpmkh.sav>
+  - `SAS` Code
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/SAS_hmwk3.sas>
+  - `SAS` formatted dataset
+    <https://github.com/melindahiggins2000/N736Fall2017_Homework3Key/raw/master/helpmkh.sas7bdat>
+
+-----
 
 # Original Assignment
 
